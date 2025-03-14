@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <link rel="stylesheet" href="../style/table.css">
+    <link rel="stylesheet" href="../style/navlist.css">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Kanaszta</title>
+    
+</head>
+<body>
+
+    <div class="header">
+        <ul>
+            <li><a href="../index.html">Kezdőlap</a></li>
+            <li><a href="./canasta.html">Kanaszta</a></li>
+            <li><a href="./photoes.html">Képek</a></li>
+            <li><a href="./login.html">Bejelentkezés</a></li>
+        </ul>
+    </div>
+    
+
+    <div class="content">
+        <h1>Kanaszta Ponttábla</h1>
+    
+        <table class="pontok">
+            <thead>
+                <tr>
+                    <th>Kör</th>
+                    <th>Csapat 1 (<span id="team1-start">50</span> pont)</th>
+                    <th>Csapat 2 (<span id="team2-start">50</span> pont)</th>
+                    <th>Csapat 3 (<span id="team3-start">50</span> pont)</th>
+                </tr>
+            </thead>
+            <tbody id="scoreTable">
+                <!-- 10 kör -->
+                <script>
+                    for (let i = 1; i <= 10; i++) {
+                        document.write(`
+                            <tr>
+                                <td>${i}</td>
+                                <td><input type="number" class="score" oninput="updateScores()" id="team1-${i}"  placeholder="" /></td>
+                                <td><input type="number" class="score" oninput="updateScores()" id="team2-${i}"  placeholder="" /></td>
+                                <td><input type="number" class="score" oninput="updateScores()" id="team3-${i}"  placeholder="" /></td>
+                            </tr>
+                        `);
+                    }
+                </script>
+            </tbody>
+            <tfoot>
+                <tr>
+                    <td>Összesen</td>
+                    <td id="total-team1">0</td>
+                    <td id="total-team2">0</td>
+                    <td id="total-team3">0</td>
+                </tr>
+            </tfoot>
+        </table>
+    </div>
+
+    <script>
+        // A táblázat törzsét reprezentáló HTML elem
+        const tbody = document.getElementById('scoreBody');
+        
+        // A csapatok összesített pontszámait tároló tömb
+        const sums = [0, 0, 0];
+
+        // 10 kör automatikus létrehozása
+        for (let i = 1; i <= 10; i++) {
+            const row = document.createElement('tr'); // Új sor létrehozása
+            row.innerHTML = `
+                <td>${i}</td>
+                <td><input type="number" min="0" data-team="0" onchange="updateScore()"></td>
+                <td><input type="number" min="0" data-team="1" onchange="updateScore()"></td>
+                <td><input type="number" min="0" data-team="2" onchange="updateScore()"></td>
+            `;
+            tbody.appendChild(row); // Az új sor hozzáadása a táblázathoz
+        }
+
+        // Pontok frissítése és összegzése
+        function updateScore() {
+            // Először nullázzuk az összegeket
+            sums.fill(0);
+            
+            // Az összes input mezőt bejárjuk és összeadjuk a pontokat
+            document.querySelectorAll('input[type="number"]').forEach(input => {
+                const team = input.dataset.team; // Csapat azonosítójának kiolvasása
+                sums[team] += Number(input.value) || 0; // A beírt értéket hozzáadjuk a megfelelő csapat összegéhez
+            });
+            
+            // Frissítjük a láblécben az összesített pontszámokat
+            document.getElementById('sum1').textContent = sums[0];
+            document.getElementById('sum2').textContent = sums[1];
+            document.getElementById('sum3').textContent = sums[2];
+        }
+    </script>
+
+<script>
+    function calculateStartPoints(score) {
+        if (score < 1500) return 50;
+        if (score < 3500) return 90;
+        if (score < 5500) return 120;
+        return 150;
+    }
+    
+    function updateScores() {
+        let teamTotals = [0, 0, 0];
+        for (let i = 1; i <= 10; i++) {
+            teamTotals[0] += Number(document.getElementById(`team1-${i}`).value) || 0;
+            teamTotals[1] += Number(document.getElementById(`team2-${i}`).value) || 0;
+            teamTotals[2] += Number(document.getElementById(`team3-${i}`).value) || 0;
+        }
+        
+        document.getElementById("total-team1").innerText = teamTotals[0];
+        document.getElementById("total-team2").innerText = teamTotals[1];
+        document.getElementById("total-team3").innerText = teamTotals[2];
+        
+        document.getElementById("team1-start").innerText = calculateStartPoints(teamTotals[0]);
+        document.getElementById("team2-start").innerText = calculateStartPoints(teamTotals[1]);
+        document.getElementById("team3-start").innerText = calculateStartPoints(teamTotals[2]);
+    }
+</script>
+</body>
+</html>

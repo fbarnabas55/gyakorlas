@@ -1,0 +1,54 @@
+.pontok {
+    
+    width: 80%;
+    border-collapse: collapse;
+    color: #00d9ff;
+    background-color: rgb(61, 61, 61);
+    box-shadow: 0 5px 8px #00d9ff;
+    border-radius: 10px;
+    overflow: hidden;
+    margin: 0 auto;  
+}
+
+.pontok th, td {
+    border: 1px solid #3a3939;
+    padding: 12px;
+    text-align: center;
+}
+
+.pontok th {
+    background-color: #00d9ff;
+    color: #eeeff0;
+}
+
+.pontok tr:hover {
+    background-color: #868585;
+}
+
+.pontok tbody tr:nth-child(even) {
+    background-color: #504f4f;
+}
+.pontok tbody tr:nth-child(even):hover {
+    background-color: #868585;
+}
+
+.pontok input[type="number"] {
+    width: 80px;
+    padding: 5px;
+    font-size: 20px;
+    text-align: center;
+    border: 2px solid #00d9ff;
+    border-radius: 5px;
+    outline: none;
+}
+
+.pontok input[type="number"]:focus {
+    border-color: #00d9ff;
+    box-shadow: 0 0 5px #00d9ff;
+}
+
+.pontok input[type="number"]::-webkit-inner-spin-button,
+.pontok input[type="number"]::-webkit-outer-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+}
