@@ -18,7 +18,6 @@
             <li><a href="./login.html">Bejelentkezés</a></li>
         </ul>
     </div>
-    
 
     <div class="content">
         <h1>Kanaszta Ponttábla</h1>
@@ -27,9 +26,9 @@
             <thead>
                 <tr>
                     <th>Kör</th>
-                    <th>Csapat 1 (<span id="team1-start">50</span> pont)</th>
-                    <th>Csapat 2 (<span id="team2-start">50</span> pont)</th>
-                    <th>Csapat 3 (<span id="team3-start">50</span> pont)</th>
+                    <th>Csapat 1 (<span id="team1-start">50</span>)</th>
+                    <th>Csapat 2 (<span id="team2-start">50</span>)</th>
+                    <th>Csapat 3 (<span id="team3-start">50</span>)</th>
                 </tr>
             </thead>
             <tbody id="scoreTable">
@@ -100,7 +99,8 @@
         if (score < 1500) return 50;
         if (score < 3500) return 90;
         if (score < 5500) return 120;
-        return 150;
+        if (score < 7500) return 150;
+        return "Kanaszta";
     }
     
     function updateScores() {
