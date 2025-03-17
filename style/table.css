@@ -7,7 +7,7 @@
     box-shadow: 0 5px 8px #00d9ff;
     border-radius: 10px;
     overflow: hidden;
-    margin: 0 auto;  
+    margin: 10px auto;
 }
 
 .pontok th, td {
@@ -30,6 +30,15 @@
 }
 .pontok tbody tr:nth-child(even):hover {
     background-color: #868585;
+}
+
+.pontok th:first-child,
+.pontok td:first-child {
+    width: 1%; /* A lehető legkisebb, hogy a tartalom elférjen */
+    white-space: nowrap; /* Megakadályozza a sortörést */
+    padding: 0px; /* Csökkentett belső tér */
+    text-align: center; /* Számok középre igazítása */
+    
 }
 
 .pontok input[type="number"] {
