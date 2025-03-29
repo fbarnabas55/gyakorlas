@@ -29,6 +29,7 @@
                     <th>Csapat 1 (<span id="team1-start">50</span>)</th>
                     <th>Csapat 2 (<span id="team2-start">50</span>)</th>
                     <th>Csapat 3 (<span id="team3-start">50</span>)</th>
+                    <th>Csapat 4 (<span id="team4-start">50</span>)</th>
                 </tr>
             </thead>
             <tbody id="scoreTable">
@@ -41,6 +42,7 @@
                                 <td><input type="number" class="score" oninput="updateScores()" id="team1-${i}"  placeholder="" /></td>
                                 <td><input type="number" class="score" oninput="updateScores()" id="team2-${i}"  placeholder="" /></td>
                                 <td><input type="number" class="score" oninput="updateScores()" id="team3-${i}"  placeholder="" /></td>
+                                <td><input type="number" class="score" oninput="updateScores()" id="team4-${i}"  placeholder="" /></td>
                             </tr>
                         `);
                     }
@@ -52,6 +54,7 @@
                     <td id="total-team1">0</td>
                     <td id="total-team2">0</td>
                     <td id="total-team3">0</td>
+                    <td id="total-team4">0</td>
                 </tr>
             </tfoot>
         </table>
@@ -62,7 +65,7 @@
         const tbody = document.getElementById('scoreBody');
         
         // A csapatok összesített pontszámait tároló tömb
-        const sums = [0, 0, 0];
+        const sums = [0, 0, 0, 0];
 
         // 10 kör automatikus létrehozása
         for (let i = 1; i <= 10; i++) {
@@ -72,6 +75,8 @@
                 <td><input type="number" min="0" data-team="0" onchange="updateScore()"></td>
                 <td><input type="number" min="0" data-team="1" onchange="updateScore()"></td>
                 <td><input type="number" min="0" data-team="2" onchange="updateScore()"></td>
+                <td><input type="number" min="0" data-team="3" onchange="updateScore()"></td>
+
             `;
             tbody.appendChild(row); // Az új sor hozzáadása a táblázathoz
         }
@@ -91,6 +96,7 @@
             document.getElementById('sum1').textContent = sums[0];
             document.getElementById('sum2').textContent = sums[1];
             document.getElementById('sum3').textContent = sums[2];
+            document.getElementById('sum4').textContent = sums[3];
         }
     </script>
 
@@ -109,15 +115,18 @@
             teamTotals[0] += Number(document.getElementById(`team1-${i}`).value) || 0;
             teamTotals[1] += Number(document.getElementById(`team2-${i}`).value) || 0;
             teamTotals[2] += Number(document.getElementById(`team3-${i}`).value) || 0;
+            teamTotals[3] += Number(document.getElementById(`team4-${i}`).value) || 0;
         }
         
         document.getElementById("total-team1").innerText = teamTotals[0];
         document.getElementById("total-team2").innerText = teamTotals[1];
         document.getElementById("total-team3").innerText = teamTotals[2];
+        document.getElementById("total-team4").innerText = teamTotals[3];
         
         document.getElementById("team1-start").innerText = calculateStartPoints(teamTotals[0]);
         document.getElementById("team2-start").innerText = calculateStartPoints(teamTotals[1]);
         document.getElementById("team3-start").innerText = calculateStartPoints(teamTotals[2]);
+        document.getElementById("team4-start").innerText = calculateStartPoints(teamTotals[3]);
     }
 </script>
 </body>
